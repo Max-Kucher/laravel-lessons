@@ -2,6 +2,15 @@
 
 @section('title', 'Home page')
 
+@section('custom_styles')
+    <link rel="stylesheet" type="text/css" href="/styles/main_styles.css">
+    <link rel="stylesheet" type="text/css" href="/styles/responsive.css">
+@endsection
+
+@section('custom_scripts')
+    <script src="/js/custom.js"></script>
+@endsection
+
 @section('content')
 	<!-- Home -->
 
@@ -149,8 +158,12 @@
 							<div class="product_image"><img src="{{ $img }}" alt="{{ $product->product }}"></div>
 							<div class="product_extra product_sale"><a href="categories.html">Sale</a></div>
 							<div class="product_content">
-								<div class="product_title"><a href="product.html">{{ $product->product }}</a></div>
-								<div class="product_price">${{ $product->price }}</div>
+								<div class="product_title"><a href="{{ route('showProduct', ['category', $product->id]) }}">{{ $product->product }}</a></div>
+								@if ($product->old_price !== null && $product->old_price > $product->price)
+                                    <div class="product_old_price">${{ $product->old_price }}</div>
+                                @endif
+
+                                <div class="product_price">${{ $product->price }}</div>
 							</div>
 						</div>
                         @endforeach
@@ -222,32 +235,6 @@
 					</div>
 				</div>
 
-			</div>
-		</div>
-	</div>
-
-	<!-- Newsletter -->
-
-	<div class="newsletter">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="newsletter_border"></div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-8 offset-lg-2">
-					<div class="newsletter_content text-center">
-						<div class="newsletter_title">Subscribe to our newsletter</div>
-						<div class="newsletter_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros</p></div>
-						<div class="newsletter_form_container">
-							<form action="#" id="newsletter_form" class="newsletter_form">
-								<input type="email" class="newsletter_input" required="required">
-								<button class="newsletter_button trans_200"><span>Subscribe</span></button>
-							</form>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
