@@ -14,14 +14,10 @@ class IndexController extends Controller
      */
     public function index() : View
     {
-//        $products = Product::where('in_stock', true)->get();
-//
-//        foreach ($products as $product) {
-//            echo $product->product . ' ' . $product->price . '<br/>';
-//        }
+        $products = Product::where('in_stock', true)->orderBy('created_at')->take(8)->get();
 
-        return view('index.index');
+        return view('index.index', [
+            'products' => $products,
+        ]);
     }
-
-    //
 }
