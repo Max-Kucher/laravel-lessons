@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class indexController extends Controller
+class IndexController extends Controller
 {
 
     /**
@@ -13,6 +14,12 @@ class indexController extends Controller
      */
     public function index() : View
     {
+        $products = Product::where('in_stock', true)->get();
+
+        foreach ($products as $product) {
+            echo $product->product . ' ' . $product->price . '<br/>';
+        }
+
         return view('index.index');
     }
 
