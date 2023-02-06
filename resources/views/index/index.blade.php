@@ -147,7 +147,7 @@
 
                             @if(count($product->images))
                                 @php
-                                    $img = "images/{$product->images[0]->img}"
+                                    $img = "/images/{$product->images[0]->img}"
                                 @endphp
                             @else
                                 @php
@@ -160,7 +160,7 @@
 							<div class="product_extra product_sale"><a href="{{ route('showCategory', [$product->category->alias]) }}">{{ $product->category->category }}</a></div>
                             @endif
                             <div class="product_content">
-								<div class="product_title"><a href="{{ route('showProduct', ['category', $product->id]) }}">{{ $product->product }}</a></div>
+								<div class="product_title"><a href="{{ route('showProduct', [$product->category->alias ?? 'category', $product->id]) }}">{{ $product->product }}</a></div>
 								@if ($product->old_price !== null && $product->old_price > $product->price)
                                     <div class="product_old_price">${{ $product->old_price }}</div>
                                 @endif
@@ -169,9 +169,6 @@
 							</div>
 						</div>
                         @endforeach
-
-{{--                            https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/450px-No_image_available.svg.png--}}
-
 					</div>
 
 				</div>
