@@ -30,7 +30,7 @@
                             <nav class="main_nav">
                                 <ul>
                                     <li class="hassubs active">
-                                        <a href="index.html">Home</a>
+                                        <a href="{{ route('index') }}">Home</a>
                                         <ul>
                                             <li><a href="categories.html">Categories</a></li>
                                             <li><a href="product.html">Product</a></li>
@@ -40,7 +40,7 @@
                                         </ul>
                                     </li>
                                     <li class="hassubs">
-                                        <a href="categories.html">Categories</a>
+                                        <a href="{{ route('showCategory', [$menu_categories[0]->alias]) }}">{{ $menu_categories[0]->category }}</a>
                                         <ul style="min-width:150px">
                                             @foreach($menu_categories as $category)
                                                 <li><a href="{{ route('showCategory', [$category->alias]) }}">{{ $category->category }}</a></li>

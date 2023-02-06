@@ -156,8 +156,10 @@
                             @endif
 
 							<div class="product_image"><img src="{{ $img }}" alt="{{ $product->product }}"></div>
-							<div class="product_extra product_sale"><a href="categories.html">Sale</a></div>
-							<div class="product_content">
+                            @if ($product->category !== null)
+							<div class="product_extra product_sale"><a href="{{ route('showCategory', [$product->category->alias]) }}">{{ $product->category->category }}</a></div>
+                            @endif
+                            <div class="product_content">
 								<div class="product_title"><a href="{{ route('showProduct', ['category', $product->id]) }}">{{ $product->product }}</a></div>
 								@if ($product->old_price !== null && $product->old_price > $product->price)
                                     <div class="product_old_price">${{ $product->old_price }}</div>

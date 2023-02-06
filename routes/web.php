@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'IndexController@index');
+Route::get('/', 'IndexController@index')->name('index');
 
 Route::get('/{cat}/{p_id}.html', 'ProductController@view')->name('showProduct');
 
