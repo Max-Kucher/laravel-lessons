@@ -9,6 +9,60 @@
 
 @section('custom_scripts')
     <script src="/js/categories.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('.product_sorting_btn').click(function () {
+                let options = this.getAttribute('data-isotope-option');
+
+                if (options !== undefined && options !== null && options.length) {
+                    options = JSON.parse(options);
+
+                    let csrf = document.querySelector('head meta[name="csrf-token"]');
+
+                    if (options.sortBy !== undefined && options.sortBy !== null) {
+                        $.ajax({
+                            url: '{{ route('showCategory', $category->alias) }}',
+                            method: 'GET',
+                            data: options,
+                            success: function(response) {
+                                if (typeof response === 'string') {
+                                    let grid = document.querySelector('.product_grid');
+                                    grid.innerHTML = response;
+
+                                    let $grid = $(grid);
+
+                                    $grid.isotope('destroy');
+                                    $grid.isotope({
+                                        itemSelector: '.product',
+                                        layoutMode: 'fitRows',
+                                        fitRows:
+                                            {
+                                                gutter: 30
+                                            },
+                                        animationOptions:
+                                            {
+                                                duration: 750,
+                                                easing: 'linear',
+                                                queue: false
+                                            }
+                                    });
+                                }
+
+                                let url = location.protocol + '//' + location.host + location.pathname
+                                    + '?soryBy=' + options.sortBy + '&sortOrder=' + options.sortOrder;
+
+                                history.pushState({}, '', url);
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': csrf.content,
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    </script>
 @endsection
 
 @section('content')
@@ -53,9 +107,11 @@
                                         <span class="sorting_text">Sort by</span>
                                         <i class="fa fa-chevron-down" aria-hidden="true"></i>
                                         <ul>
-                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Default</span></li>
-                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Price</span></li>
-                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "stars" }'><span>Name</span></li>
+                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "id", "sortOrder": "asc" }'><span>Default</span></li>
+                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "price", "sortOrder": "asc" }'><span>Price: Low to high</span></li>
+                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "price", "sortOrder": "desc" }'><span>Price: High to low</span></li>
+                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "product", "sortOrder": "asc" }'><span>Name: A to Z</span></li>
+                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "product", "sortOrder": "desc" }'><span>Name: Z to A</span></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -68,7 +124,7 @@
                 <div class="col">
 
                     <div class="product_grid">
-                        @foreach($category->products as $product)
+                        @foreach($products as $product)
                         <!-- Product -->
                         <div class="product">
 

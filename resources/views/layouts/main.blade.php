@@ -4,7 +4,12 @@
     <title>@yield('title')</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Sublime project">
+    @if (isset($meta_description))
+    <meta name="description" content="{{ $meta_description }}">
+    @endif
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
     <link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -26,7 +31,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                            <div class="logo"><a href="#">Sublime.</a></div>
+                            <div class="logo"><a href="{{ route('index') }}">Sublime.</a></div>
                             <nav class="main_nav">
                                 <ul>
                                     <li class="hassubs active">
