@@ -9,6 +9,24 @@
 
 @section('custom_scripts')
     <script src="/js/product.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).on('submit', 'form.ajax-from', function (event) {
+                let form_data = new URLSearchParams(Array.from(new FormData(this))).toString();
+                let method = this.method.toUpperCase();
+
+                $.ajax({
+                    url: '{{ route('checkoutAdd') }}?' + form_data,
+                    method: method.length ? method : 'GET',
+                    success: function (response) {
+                        console.log(response);
+                    },
+                });
+
+                event.preventDefault();
+            });
+        });
+    </script>
 @endsection
 
 @section('content')
@@ -71,7 +89,12 @@
 
                 <!-- Product Content -->
                 <div class="col-lg-6">
-                    <div class="details_content">
+                    <form class="ajax-from" action="{{ route("checkoutAdd") }}" method="post">
+                        @csrf
+
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+                        <div class="details_content">
                         <div class="details_name">{{ $product->product }}</div>
 
                         @if ($product->old_price !== null && $product->old_price > $product->price)
@@ -103,13 +126,13 @@
                         <div class="product_quantity_container">
                             <div class="product_quantity clearfix">
                                 <span>Qty</span>
-                                <input id="quantity_input" type="text" pattern="[0-9]*" value="1">
+                                <input id="quantity_input" type="text" name="amount" pattern="[0-9]*" value="1">
                                 <div class="quantity_buttons">
                                     <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
                                     <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
                                 </div>
                             </div>
-                            <div class="button cart_button"><a href="#">Add to cart</a></div>
+                            <div class="button cart_button"><button type="submit">Add to cart</button></div>
                         </div>
 
                         <!-- Share -->
@@ -123,6 +146,7 @@
                             </ul>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
 

@@ -18,3 +18,5 @@ Route::get('/products/{cat}/{p_id}.html', 'ProductController@view')->name('showP
 Route::get('/products/{cat}/', 'CategoryController@view')->name('showCategory');
 
 Route::get('/cart.html', 'CheckoutController@cart')->name('checkoutCart');
+
+Route::post('/checkout-add', 'CheckoutController@addToCart')->name('checkoutAdd');

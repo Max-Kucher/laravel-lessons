@@ -11,4 +11,11 @@ class CheckoutController extends Controller
     {
         return view('checkout.cart');
     }
+
+    public function addToCart(Request $req)
+    {
+        return response()->json([
+            'data' => $req->ip()
+        ]);
+    }
 }
