@@ -21,9 +21,17 @@ class CategoryController extends Controller
             $sort_order = 'asc';
         }
 
+        if (empty($req->itemsPerPage)) {
+            $items_per_page = 2;
+        } else {
+            $items_per_page = $req->itemsPerPage;
+        }
+
+        $page = $req->page ?? 1;
+
         $products = Product::where('category_id', $item->id)
             ->orderBy($order_by, $sort_order)
-            ->get();
+            ->paginate($items_per_page);
 
         if ($req->ajax()) {
             return $order_by . '-' . $sort_order .preg_replace('/\s\s+/', ' ', view('ajax.products_ajax', [
@@ -34,6 +42,7 @@ class CategoryController extends Controller
         return view('categories.view', [
             'category' => $item,
             'products' => $products,
+            'pagination_page' => $page,
         ]);
     }
 }

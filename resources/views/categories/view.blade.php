@@ -50,7 +50,7 @@
                                 }
 
                                 let url = location.protocol + '//' + location.host + location.pathname
-                                    + '?soryBy=' + options.sortBy + '&sortOrder=' + options.sortOrder;
+                                    + '?soryBy=' + options.sortBy + '&sortOrder=' + options.sortOrder + '&page=' + options.page;
 
                                 history.pushState({}, '', url);
                             },
@@ -107,11 +107,11 @@
                                         <span class="sorting_text">Sort by</span>
                                         <i class="fa fa-chevron-down" aria-hidden="true"></i>
                                         <ul>
-                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "id", "sortOrder": "asc" }'><span>Default</span></li>
-                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "price", "sortOrder": "asc" }'><span>Price: Low to high</span></li>
-                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "price", "sortOrder": "desc" }'><span>Price: High to low</span></li>
-                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "product", "sortOrder": "asc" }'><span>Name: A to Z</span></li>
-                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "product", "sortOrder": "desc" }'><span>Name: Z to A</span></li>
+                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "id", "sortOrder": "asc", "page": {{ $pagination_page }} }'><span>Default</span></li>
+                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "price", "sortOrder": "asc", "page": {{ $pagination_page }} }'><span>Price: Low to high</span></li>
+                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "price", "sortOrder": "desc", "page": {{ $pagination_page }} }'><span>Price: High to low</span></li>
+                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "product", "sortOrder": "asc", "page": {{ $pagination_page }} }'><span>Name: A to Z</span></li>
+                                            <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "product", "sortOrder": "desc", "page": {{ $pagination_page }} }'><span>Name: Z to A</span></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -147,13 +147,8 @@
                         </div>
                         @endforeach
                     </div>
-                    <div class="product_pagination">
-                        <ul>
-                            <li class="active"><a href="#">01.</a></li>
-                            <li><a href="#">02.</a></li>
-                            <li><a href="#">03.</a></li>
-                        </ul>
-                    </div>
+
+                    {{ $products->appends(request()->query())->links('common.pagination') }}
 
                 </div>
             </div>
