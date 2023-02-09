@@ -53,9 +53,9 @@
             </div>
             <div class="row cart_items_row">
                 <div class="col">
-
-                    <!-- Cart Item -->
-                    <div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
+                    @foreach($cart->getContent() as $cart_product)
+                        <!-- Cart Item -->
+                        <div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
                         <!-- Name -->
                         <div class="cart_item_product d-flex flex-row align-items-center justify-content-start">
                             <div class="cart_item_image">
@@ -84,7 +84,7 @@
                         <!-- Total -->
                         <div class="cart_item_total">$790.90</div>
                     </div>
-
+                    @endforeach
                 </div>
             </div>
             <div class="row row_cart_buttons">
