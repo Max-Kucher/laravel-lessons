@@ -39,7 +39,7 @@
                                         <ul>
                                             <li><a href="categories.html">Categories</a></li>
                                             <li><a href="product.html">Product</a></li>
-                                            <li><a href="cart.html">Cart</a></li>
+                                            <li><a href="{{ route("checkoutCart") }}">Cart</a></li>
                                             <li><a href="checkout.html">Check out</a></li>
                                             <li><a href="contact.html">Contact</a></li>
                                         </ul>
@@ -47,19 +47,19 @@
                                     <li class="hassubs">
                                         <a href="{{ route('showCategory', [$menu_categories[0]->alias]) }}">{{ $menu_categories[0]->category }}</a>
                                         <ul style="min-width:150px">
-                                            @foreach($menu_categories as $category)
-                                                <li><a href="{{ route('showCategory', [$category->alias]) }}">{{ $category->category }}</a></li>
+                                            @foreach($menu_categories as $menu_category)
+                                                <li><a href="{{ route('showCategory', [$menu_category->alias]) }}">{{ $menu_category->category }}</a></li>
                                             @endforeach
                                         </ul>
                                     </li>
-                                    <li><a href="#">Accessories</a></li>
-                                    <li><a href="#">Offers</a></li>
+                                    <li><a href="{{ route('index') }}">Accessories</a></li>
+                                    <li><a href="{{ route('index') }}">Offers</a></li>
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
                             </nav>
                             <div class="header_extra ml-auto">
                                 <div class="shopping_cart">
-                                    <a href="cart.html">
+                                    <a href="{{ route("checkoutCart") }}">
                                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                              viewBox="0 0 489 489" style="enable-background:new 0 0 489 489;" xml:space="preserve">
 											<g>
@@ -147,7 +147,7 @@
                                 <li class="page_menu_item menu_mm"><a href="{{ route('showCategory', [$menu_categories[0]->alias]) }}">{{ $menu_categories[0]->category }}<i class="fa fa-angle-down"></i></a></li>
                             @endif
                             <li class="page_menu_item menu_mm"><a href="product.html">Product<i class="fa fa-angle-down"></i></a></li>
-                            <li class="page_menu_item menu_mm"><a href="cart.html">Cart<i class="fa fa-angle-down"></i></a></li>
+                            <li class="page_menu_item menu_mm"><a href="{{ route("checkoutCart") }}">Cart<i class="fa fa-angle-down"></i></a></li>
                             <li class="page_menu_item menu_mm"><a href="checkout.html">Checkout<i class="fa fa-angle-down"></i></a></li>
                             <li class="page_menu_item menu_mm"><a href="contact.html">Contact<i class="fa fa-angle-down"></i></a></li>
                         </ul>
@@ -156,14 +156,14 @@
                         <li class="page_menu_item has-children menu_mm">
                             <a href="{{ route('showCategory', [$menu_categories[0]->alias]) }}">{{ $menu_categories[0]->category }}<i class="fa fa-angle-down"></i></a>
                             <ul class="page_menu_selection menu_mm">
-                                @foreach($menu_categories as $category)
-                                    <li class="page_menu_item menu_mm"><a href="{{ route('showCategory', [$category->alias]) }}">{{ $category->category }}<i class="fa fa-angle-down"></i></a></li>
+                                @foreach($menu_categories as $menu_category)
+                                    <li class="page_menu_item menu_mm"><a href="{{ route('showCategory', [$menu_category->alias]) }}">{{ $menu_category->category }}<i class="fa fa-angle-down"></i></a></li>
                                 @endforeach
                             </ul>
                         </li>
                     @endif
-                    <li class="page_menu_item menu_mm"><a href="index.html">Accessories<i class="fa fa-angle-down"></i></a></li>
-                    <li class="page_menu_item menu_mm"><a href="#">Offers<i class="fa fa-angle-down"></i></a></li>
+                    <li class="page_menu_item menu_mm"><a href="{{ route('index') }}">Accessories<i class="fa fa-angle-down"></i></a></li>
+                    <li class="page_menu_item menu_mm"><a href="{{ route('index') }}">Offers<i class="fa fa-angle-down"></i></a></li>
                     <li class="page_menu_item menu_mm"><a href="contact.html">Contact<i class="fa fa-angle-down"></i></a></li>
                 </ul>
             </div>

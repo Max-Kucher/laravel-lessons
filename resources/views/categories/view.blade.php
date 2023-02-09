@@ -71,7 +71,7 @@
     <div class="home">
         <div class="home_container">
             @if ($category->main_image !== null && strlen($category->main_image))
-            <div class="home_background" style="background-image:url({{ $category->main_image }})"></div>
+            <div class="home_background" style="background-image:url(/{{ $category->main_image }})"></div>
             @endif
             <div class="home_content_container">
                 <div class="container">

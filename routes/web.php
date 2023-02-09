@@ -13,6 +13,8 @@
 
 Route::get('/', 'IndexController@index')->name('index');
 
-Route::get('/{cat}/{p_id}.html', 'ProductController@view')->name('showProduct');
+Route::get('/products/{cat}/{p_id}.html', 'ProductController@view')->name('showProduct');
 
-Route::get('/{cat}/', 'CategoryController@view')->name('showCategory');
+Route::get('/products/{cat}/', 'CategoryController@view')->name('showCategory');
+
+Route::get('/cart.html', 'CheckoutController@cart')->name('checkoutCart');
